@@ -1,0 +1,142 @@
+html {
+  font-family: Roboto, sans-serif;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  font-weight: 700;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.wrapper {
+  height: 750px;
+  width: 500px;
+  
+}
+
+.calculator {
+  padding: 25px;
+  background-color: rgb(70, 70, 70);
+  box-sizing: border-box;
+  height: 100%;
+  border-radius: 25px;
+  box-shadow: 0px 0px 50px rgba(77, 77, 77, 0.267)
+}
+
+.calculatorWrapper {
+  height: 100%;
+}
+
+.displayScreen {
+  height: 140px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.previousOperand {
+  /*border: 1px solid red;*/
+  align-self: flex-end;
+}
+
+.currentOperand {
+  /*border: 1px solid pink;*/
+  align-self: flex-end;
+}
+
+.calculatorKeys {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 100px);
+  justify-content: center;
+  align-content: center;
+  gap: 8px;
+}
+
+.keys {
+  background-color: rgba(224, 224, 224, 1);
+  text-align: center;
+  transition: scale 0.15s, background-color 0.25s;
+}
+
+.keys:hover, .equalKey:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.keys:active, .equalKey:active {
+  scale: 0.97;
+}
+
+.acKey {
+  background-color: rgba(244, 67, 54, 1);
+  grid-column-start: 1;
+  grid-column-end: 3;
+  color: white;
+  transition: scale 0.15s, background-color 0.25s;
+}
+
+.acKey:hover {
+  background-color: rgb(255, 95, 84);
+}
+
+.acKey:active {
+  scale: 0.97;
+}
+
+.equalKey {
+  background-color: rgba(224, 224, 224, 1);
+  grid-column-start: 3;
+  grid-column-end: 5;
+  transition: all 0.15s;
+  transition: scale 0.15s, background-color 0.25s;
+}
+
+.operatorKey {
+  background-color: rgba(255, 149, 0, 1);
+  color: white;
+  transition: scale 0.15s, background-color 0.25s;
+}
+
+.operatorKey:hover {
+  background-color: rgb(255, 168, 45);
+}
+
+.operatorKey:active {
+  scale: 0.97;
+}
+
+.delKey {
+  background-color: rgba(255, 87, 34, 1);
+  color: white;
+  transition: scale 0.15s, background-color 0.25s;
+}
+
+.delKey:hover {
+  background-color: rgb(255, 116, 74);;
+}
+
+.delKey:active {
+  scale: 0.97;
+}
+
+.keys, .acKey, .delKey, .operatorKey, .equalKey {
+  border: none;
+  padding: 0;
+  font-size: 35px;
+  cursor: pointer;
+  border-radius: 10px;
+}
