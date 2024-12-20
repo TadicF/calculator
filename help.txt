@@ -1,0 +1,4 @@
+- in case that i'm stuck, review debugger lesson to see exactly how program works
+- if having a hard time, just go to sleep and program next day
+- THINK about logic all the time
+- Also good site for exercise: https://exercism.org/

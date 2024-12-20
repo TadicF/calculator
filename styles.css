@@ -55,6 +55,8 @@ html {
 .currentOperand {
   /*border: 1px solid pink;*/
   align-self: flex-end;
+  font-size: 25px;
+  font-weight: 500;
 }
 
 .calculatorKeys {
