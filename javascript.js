@@ -21,8 +21,19 @@ function multiply(firstNum, secondNum) {
 }
 
 function divide(firstNum, secondNum) {
-  console.log(firstNum / secondNum);
-  return firstNum / secondNum;
+  if(secondNum === 0) {
+    alert('Error: Division by 0 is not allowed.');
+    firstOperand = '';
+    secondOperand = '';
+    operator = '';
+    currOperand.textContent = '';
+    prevOperand.textContent = '';
+    return '';
+  }
+  else {
+    console.log(firstNum / secondNum);
+    return firstNum / secondNum;
+  }
 }
 
 function operate(firstOperand, operator, secondOperand) {
@@ -48,12 +59,16 @@ function operate(firstOperand, operator, secondOperand) {
 
 function updateDisplay(num) {
   if(operator === '') {
+    if(firstOperand.toString() === '0') {
+      firstOperand = '';
+    }
     let tempNum = firstOperand.toString();
     tempNum += num;
     firstOperand = tempNum;
     currOperand.textContent = firstOperand;
   }
   else if(operator === '+' || operator === '-' || operator === '*' || operator == '/') {
+    
     secondOperand += num;
     currOperand.textContent = secondOperand;
   }
@@ -131,18 +146,24 @@ keyNine.addEventListener("click", () => {
 
 const keyZero = document.querySelector(".keyZero");
 keyZero.addEventListener("click", () => {
-  updateDisplay(0);
+  if(firstOperand !== '0') {
+    updateDisplay(0);
+  }
 })
 
 const divideOperator = document.querySelector(".divideOperator");
 divideOperator.addEventListener("click", () => {
   if(operator === '') {
+    if(firstOperand === '' && secondOperand === '') {
+      operator = '';
+      return alert("Error: Operators require numbers to operate.")
+    }
     operator = '/';
     prevOperand.textContent = currOperand.textContent;
     currOperand.textContent = '';
     prevOperand.textContent += " ÷";
   }
-  else {
+  else if(operator !== ''){
     let result = operate(firstOperand, operator, secondOperand);
     firstOperand = result;
     operator = '/';
@@ -155,30 +176,38 @@ divideOperator.addEventListener("click", () => {
 const multiplyOperator = document.querySelector(".multiplyOperator");
 multiplyOperator.addEventListener("click", () => {
   if(operator === '') {
+    if(firstOperand === '' && secondOperand === '') {
+      operator = '';
+      return alert("Error: cannot use operators without numbers provided")
+    }
     operator = '*';
     prevOperand.textContent = currOperand.textContent;
     currOperand.textContent = '';
     prevOperand.textContent += " x";
   }
-  else {
+  else if(operator !== '') {
     let result = operate(firstOperand, operator, secondOperand);
     firstOperand = result;
     operator = '*';
     prevOperand.textContent = `${firstOperand} x`;
     currOperand.textContent = '';
     secondOperand = '';
-  }
-})
+   }
+  })
 
 const addOperator = document.querySelector('.addOperator');
 addOperator.addEventListener("click", () => {
   if(operator === '') {
+    if(firstOperand === '' && secondOperand === '') {
+      operator = '';
+      return alert("Error: cannot use operators without numbers provided")
+    }
     operator = '+';
     prevOperand.textContent = currOperand.textContent;
     currOperand.textContent = '';
     prevOperand.textContent += ' +';
   }
-  else {
+  else if(operator !== '') {
     let result = operate(firstOperand, operator, secondOperand);
     firstOperand = result;
     operator = '+';
@@ -191,12 +220,16 @@ addOperator.addEventListener("click", () => {
 const subtractOperator = document.querySelector(".subtractOperator");
 subtractOperator.addEventListener("click", () => {
   if(operator === '') {
+    if(firstOperand === '' && secondOperand === '') {
+      operator = '';
+      return alert("Error: cannot use operators without numbers provided")
+    }
     operator = '-';
     prevOperand.textContent = currOperand.textContent;
     currOperand.textContent = '';
     prevOperand.textContent += ` -`;
   }
-  else {
+  else if(operator !== '') {
     let result = operate(firstOperand, operator, secondOperand);
     firstOperand = result;
     operator = '-';

@@ -50,12 +50,13 @@ html {
 .previousOperand {
   /*border: 1px solid red;*/
   align-self: flex-end;
+  font-size: 17px;
 }
 
 .currentOperand {
   /*border: 1px solid pink;*/
   align-self: flex-end;
-  font-size: 25px;
+  font-size: 35px;
   font-weight: 500;
 }
 
