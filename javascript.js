@@ -165,11 +165,22 @@ divideOperator.addEventListener("click", () => {
   }
   else if(operator !== ''){
     let result = operate(firstOperand, operator, secondOperand);
-    firstOperand = result;
-    operator = '/';
-    prevOperand.textContent = `${firstOperand} ÷`
-    currOperand.textContent = '';
-    secondOperand = '';
+    let isInteger = Number.isInteger(result);
+    if(!isInteger) {
+      firstOperand = result.toFixed(2);
+      operator = '/';
+      prevOperand.textContent = `${result.toFixed(2)} ÷`;
+      currOperand.textContent = '';
+      secondOperand = '';
+    }
+    else if(isInteger) {
+      firstOperand = result;
+      operator = '/';
+      prevOperand.textContent = `${firstOperand} ÷`
+      currOperand.textContent = '';
+      secondOperand = '';
+    }
+    isInteger = '';
   }
 })
 
@@ -187,11 +198,22 @@ multiplyOperator.addEventListener("click", () => {
   }
   else if(operator !== '') {
     let result = operate(firstOperand, operator, secondOperand);
-    firstOperand = result;
-    operator = '*';
-    prevOperand.textContent = `${firstOperand} x`;
-    currOperand.textContent = '';
-    secondOperand = '';
+    let isInteger = Number.isInteger(result);
+    if(!isInteger) {
+      firstOperand = result.toFixed(2);
+      operator = '*';
+      prevOperand.textContent = `${result.toFixed(2)} x`;
+      currOperand.textContent = '';
+      secondOperand = '';
+    }
+    else if(isInteger) {
+      firstOperand = result;
+      operator = '*';
+      prevOperand.textContent = `${firstOperand} x`
+      currOperand.textContent = '';
+      secondOperand = '';
+    }
+    isInteger = '';
    }
   })
 
@@ -209,11 +231,22 @@ addOperator.addEventListener("click", () => {
   }
   else if(operator !== '') {
     let result = operate(firstOperand, operator, secondOperand);
-    firstOperand = result;
-    operator = '+';
-    prevOperand.textContent = `${firstOperand} +`;
-    currOperand.textContent = '';
-    secondOperand = '';
+    let isInteger = Number.isInteger(result);
+    if(!isInteger) {
+      firstOperand = result.toFixed(2);
+      operator = '+';
+      prevOperand.textContent = `${result.toFixed(2)} +`;
+      currOperand.textContent = '';
+      secondOperand = '';
+    }
+    else if(isInteger) {
+      firstOperand = result;
+      operator = '+';
+      prevOperand.textContent = `${firstOperand} +`
+      currOperand.textContent = '';
+      secondOperand = '';
+    }
+    isInteger = '';
   }
 })
 
@@ -231,11 +264,22 @@ subtractOperator.addEventListener("click", () => {
   }
   else if(operator !== '') {
     let result = operate(firstOperand, operator, secondOperand);
-    firstOperand = result;
-    operator = '-';
-    prevOperand.textContent = `${firstOperand} -`;
-    currOperand.textContent = '';
-    secondOperand = '';
+    let isInteger = Number.isInteger(result);
+    if(!isInteger) {
+      firstOperand = result.toFixed(2);
+      operator = '-';
+      prevOperand.textContent = `${result.toFixed(2)} -`;
+      currOperand.textContent = '';
+      secondOperand = '';
+    }
+    else if(isInteger) {
+      firstOperand = result;
+      operator = '-';
+      prevOperand.textContent = `${firstOperand} -`
+      currOperand.textContent = '';
+      secondOperand = '';
+    }
+    isInteger = '';
   }
 })
 
@@ -243,12 +287,24 @@ const equalOperator = document.querySelector(".equalOperator");
 equalOperator.addEventListener("click", () => {
   if(operator !== '') {
     let result = operate(firstOperand, operator, secondOperand);
-    currOperand.textContent = '';
-    prevOperand.textContent = '';
-    currOperand.textContent = result;
-    firstOperand = result;
-    secondOperand = '';
-    operator = '';
+    let isInteger = Number.isInteger(result);
+    if(!isInteger) {
+      prevOperand.textContent = '';
+      currOperand.textContent = '';
+      currOperand.textContent = result.toFixed(2);
+      firstOperand = result.toFixed(2);
+      secondOperand = '';
+      operator = '';
+    }
+    else if(isInteger) {
+      currOperand.textContent = '';
+      prevOperand.textContent = '';
+      currOperand.textContent = result;
+      firstOperand = result;
+      secondOperand = '';
+      operator = '';
+    }
+    isInteger = '';
   }
 })
 
