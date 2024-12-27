@@ -2,6 +2,7 @@ let firstOperand = '';
 let operator = '';
 let secondOperand = '';
 let tempValue = '';
+let isDot = true;
 const currOperand = document.querySelector(".currentOperand")
 const prevOperand = document.querySelector(".previousOperand")
 
@@ -40,6 +41,7 @@ function operate(firstOperand, operator, secondOperand) {
   console.log(operator);
   let firstNum = Number(firstOperand);
   let secondNum = Number(secondOperand);
+  isDot = true;
 
   switch(operator) {
     case '+':
@@ -57,20 +59,57 @@ function operate(firstOperand, operator, secondOperand) {
   }
 }
 
-function updateDisplay(num) {
-  if(operator === '') {
-    if(firstOperand.toString() === '0') {
-      firstOperand = '';
-    }
-    let tempNum = firstOperand.toString();
-    tempNum += num;
-    firstOperand = tempNum;
-    currOperand.textContent = firstOperand;
+function checkFloat(string) {
+  let val = parseFloat(string);
+  if(!isNaN(val) && val.toString().indexOf('.') != -1) {
+    return true;
   }
-  else if(operator === '+' || operator === '-' || operator === '*' || operator == '/') {
-    
-    secondOperand += num;
-    currOperand.textContent = secondOperand;
+  else {
+    return false;
+  }
+}
+
+function checkFirstLimit() {
+  let firstLength = firstOperand.split('').length;
+  if(firstLength >= 21) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function checkSecondLimit() {
+  let secondLength = secondOperand.split('').length;
+  if(secondLength >= 21) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function updateDisplay(num) {
+  let firstLimit = checkFirstLimit();
+  let secondLimit = checkSecondLimit();
+  console.log(firstLimit);
+  if(firstLimit) {
+    if(operator === '') {
+      if(firstOperand.toString() === '0') {
+        firstOperand = '';
+      }
+      let tempNum = firstOperand.toString();
+      tempNum += num;
+      firstOperand = tempNum;
+      currOperand.textContent = firstOperand;
+    }
+  }
+  if(secondLimit) {
+    if(operator === '+' || operator === '-' || operator === '*' || operator == '/') {
+      
+      secondOperand += num;
+      currOperand.textContent = secondOperand;
+    }
   }
 } 
 
@@ -80,6 +119,7 @@ function clearDisplay() {
   operator = '';
   currOperand.textContent = '';
   prevOperand.textContent = '';
+  isDot = true;
 }
 
 function deleteLastOperand() {
@@ -87,6 +127,12 @@ function deleteLastOperand() {
     let num = `${firstOperand}`;
     let temp = num.split('');
     let deleted = temp.pop();
+    if(deleted === '.') {
+      isDot = true;
+    }
+    else if(deleted !== '.') {
+      isDot = false;
+    }
     firstOperand = temp.toString().replace(/,/g, '');
     currOperand.textContent = firstOperand;
   }
@@ -94,6 +140,12 @@ function deleteLastOperand() {
     let num = `${secondOperand}`;
     let temp = num.split('');
     let deleted = temp.pop();
+    if(deleted === '.') {
+      isDot = true;
+    }
+    else if(deleted !== '.') {
+      isDot = false;
+    }
     secondOperand = temp.toString().replace(/,/g, '');
     currOperand.textContent = secondOperand;
   }
@@ -153,6 +205,7 @@ keyZero.addEventListener("click", () => {
 
 const divideOperator = document.querySelector(".divideOperator");
 divideOperator.addEventListener("click", () => {
+  isDot = true;
   if(operator === '') {
     if(firstOperand === '' && secondOperand === '') {
       operator = '';
@@ -186,6 +239,7 @@ divideOperator.addEventListener("click", () => {
 
 const multiplyOperator = document.querySelector(".multiplyOperator");
 multiplyOperator.addEventListener("click", () => {
+  isDot = true;
   if(operator === '') {
     if(firstOperand === '' && secondOperand === '') {
       operator = '';
@@ -219,6 +273,7 @@ multiplyOperator.addEventListener("click", () => {
 
 const addOperator = document.querySelector('.addOperator');
 addOperator.addEventListener("click", () => {
+  isDot = true;
   if(operator === '') {
     if(firstOperand === '' && secondOperand === '') {
       operator = '';
@@ -252,6 +307,7 @@ addOperator.addEventListener("click", () => {
 
 const subtractOperator = document.querySelector(".subtractOperator");
 subtractOperator.addEventListener("click", () => {
+  isDot = true;
   if(operator === '') {
     if(firstOperand === '' && secondOperand === '') {
       operator = '';
@@ -305,6 +361,15 @@ equalOperator.addEventListener("click", () => {
       operator = '';
     }
     isInteger = '';
+    // function to check if result is floating point
+    let isFloat = checkFloat(result);
+    console.log(isFloat);
+    if(isFloat) {
+      isDot = false;
+    }
+    else if(!isFloat) {
+      isDot = true;
+    }
   }
 })
 
@@ -313,3 +378,26 @@ clearButton.addEventListener("click", clearDisplay)
 
 const deleteButton = document.querySelector(".deleteButton");
 deleteButton.addEventListener("click", deleteLastOperand);
+
+const dotOperator = document.querySelector(".dotOperator");
+dotOperator.addEventListener("click", () => {
+  if(firstOperand === '') {
+    return alert("Error: Cannot use dot operator without numbers provided.");
+  }
+  else if(isDot) {
+    if(currOperand.textContent == firstOperand) {
+      let dot = `${firstOperand}.`;
+      currOperand.textContent += '.';
+      firstOperand = dot;
+      isDot = false;
+    }
+    else if(currOperand.textContent == secondOperand) {
+      let dot = `${secondOperand}.`;
+      currOperand.textContent += '.';
+      secondOperand = dot;
+      isDot = false;
+    }
+  }
+});
+
+// 22 numbers limit on display
