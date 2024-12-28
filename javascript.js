@@ -7,17 +7,14 @@ const currOperand = document.querySelector(".currentOperand")
 const prevOperand = document.querySelector(".previousOperand")
 
 function add(firstNum, secondNum) {
-  console.log(firstNum + secondNum);
   return firstNum + secondNum;
 }
 
 function subtract(firstNum, secondNum) {
-  console.log(firstNum - secondNum);
   return firstNum - secondNum;
 }
 
 function multiply(firstNum, secondNum) {
-  console.log(firstNum * secondNum);
   return firstNum * secondNum;
 }
 
@@ -32,13 +29,11 @@ function divide(firstNum, secondNum) {
     return '';
   }
   else {
-    console.log(firstNum / secondNum);
     return firstNum / secondNum;
   }
 }
 
 function operate(firstOperand, operator, secondOperand) {
-  console.log(operator);
   let firstNum = Number(firstOperand);
   let secondNum = Number(secondOperand);
   isDot = true;
@@ -70,7 +65,7 @@ function checkFloat(string) {
 }
 
 function checkFirstLimit() {
-  let firstLength = firstOperand.split('').length;
+  let firstLength = firstOperand.toString().split('').length;
   if(firstLength >= 21) {
     return false;
   }
@@ -80,7 +75,7 @@ function checkFirstLimit() {
 }
 
 function checkSecondLimit() {
-  let secondLength = secondOperand.split('').length;
+  let secondLength = secondOperand.toString().split('').length;
   if(secondLength >= 21) {
     return false;
   }
@@ -92,7 +87,6 @@ function checkSecondLimit() {
 function updateDisplay(num) {
   let firstLimit = checkFirstLimit();
   let secondLimit = checkSecondLimit();
-  console.log(firstLimit);
   if(firstLimit) {
     if(operator === '') {
       if(firstOperand.toString() === '0') {
@@ -363,7 +357,6 @@ equalOperator.addEventListener("click", () => {
     isInteger = '';
     // function to check if result is floating point
     let isFloat = checkFloat(result);
-    console.log(isFloat);
     if(isFloat) {
       isDot = false;
     }
@@ -399,5 +392,3 @@ dotOperator.addEventListener("click", () => {
     }
   }
 });
-
-// 22 numbers limit on display
